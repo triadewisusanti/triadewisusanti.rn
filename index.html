@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Tria Dewi Susanti</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+</head>
+
+<body class="index-page">
+
+<style>
+  /* Memastikan kontainer utama relatif */
+  .image-wrapper {
+    position: relative !important;
+  }
+  
+  /* 1. INI ADALAH KEPALA BINTANG (Core Glow) */
+  .image-wrapper::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 20px !important; /* Menyesuaikan lengkungan foto */
+    
+    /* Gradien cahaya: Putih terang di pusat, menyebar ke biru/cyan layaknya bintang sci-fi */
+    background: radial-gradient(
+      circle at var(--x, 50%) var(--y, 50%), 
+      rgba(255, 255, 255, 0.95) 0%, 
+      rgba(0, 210, 255, 0.4) 15%, 
+      transparent 180px
+    ) !important;
+    
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+    pointer-events: none !important; 
+    z-index: 10 !important;
+    mix-blend-mode: screen; /* Membuat cahayanya menyatu sangat halus dengan foto */
+  }
+
+  .image-wrapper:hover::after {
+    opacity: 1 !important; 
+  }
+  
+  /* Pastikan kartu (Prescription, Drug) tetap di lapisan paling atas tanpa terhalang */
+  .floating-elements {
+    z-index: 20 !important;
+  }
+
+
+  /* 2. INI ADALAH EKOR BINTANG JATUH (Partikel Debu Cahaya) */
+  .star-particle {
+    position: absolute;
+    pointer-events: none; /* Agar tidak menghalangi klik/hover */
+    width: 6px;
+    height: 6px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px 2px #ffffff, 0 0 20px 5px #00d2ff; /* Efek neon/glow biru */
+    border-radius: 50%;
+    z-index: 9; /* Di bawah lapisan cahaya utama, tapi di atas foto */
+    transform: translate(-50%, -50%);
+    animation: fadeAndFall 0.7s ease-out forwards;
+  }
+
+  @keyframes fadeAndFall {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+      opacity: 0;
+      /* Partikel akan menyebar secara acak dan mengecil seperti memudar */
+      transform: translate(calc(-50% + var(--scatter-x)), calc(-50% + var(--scatter-y))) scale(0.1);
+    }
+  }
+  /* Sembunyikan tombol musik atas permintaan pengguna */
+  .audio-control, #music-toggle { display: none !important; }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const wrappers = document.querySelectorAll('.image-wrapper');
+    const audio = document.getElementById('bg-audio');
+
+    if (audio) {
+      audio.volume = 0.35;
+      audio.play().catch(function(error) {
+        console.warn('Audio autoplay was blocked:', error);
+        // Fallback: attempt to play once on the first user interaction
+        const tryPlay = function() {
+          audio.play().catch(function(){});
+          window.removeEventListener('click', tryPlay);
+          window.removeEventListener('touchstart', tryPlay);
+        };
+        window.addEventListener('click', tryPlay, { once: true });
+        window.addEventListener('touchstart', tryPlay, { once: true });
+      });
+    }
+    
+    wrappers.forEach(function(wrapper) {
+      let lastTime = 0; // Timer pengatur keluarnya partikel
+      
+      wrapper.addEventListener('mousemove', function(e) {
+        const rect = wrapper.getBoundingClientRect();
+        
+        // Kalkulasi posisi koordinat X dan Y kursor
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // A. Menggerakkan "Kepala Bintang" (Sorotan Cahaya Utama)
+        wrapper.style.setProperty('--x', x + 'px');
+        wrapper.style.setProperty('--y', y + 'px');
+        
+        // B. Menciptakan "Ekor Bintang" (Partikel) saat kursor bergerak
+        const now = Date.now();
+        if (now - lastTime > 25) { // Keluarkan partikel setiap 25 milidetik agar terlihat seperti aliran
+            createStarParticle(wrapper, x, y);
+            lastTime = now;
+        }
+      });
+    });
+
+    // Fungsi Pembentuk Partikel Cahaya
+    function createStarParticle(wrapper, x, y) {
+      const star = document.createElement('div');
+      star.className = 'star-particle';
+      
+      // Letakkan partikel tepat di posisi kursor
+      star.style.left = x + 'px';
+      star.style.top = y + 'px';
+      
+      // Efek sebaran (scatter) agar partikel terlihat terbang memudar secara natural
+      const scatterX = (Math.random() - 0.5) * 80; // Menyebar acak ke kiri/kanan
+      const scatterY = (Math.random() - 0.2) * 80; // Cenderung berjatuhan perlahan ke bawah
+      
+      star.style.setProperty('--scatter-x', scatterX + 'px');
+      star.style.setProperty('--scatter-y', scatterY + 'px');
+      
+      wrapper.appendChild(star);
+      
+      // Hapus partikel dari sistem setelah animasinya selesai (700ms) agar memori website tidak berat
+      setTimeout(() => {
+        if (wrapper.contains(star)) {
+          star.remove();
+        }
+      }, 700);
+    }
+  });
+</script>
+
+  <header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="gallery.html">Experience</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <div class="header-social-links">
+        <a href="https://www.instagram.com/hereinthegardenx?igsh=MXIxMGpqaTU1NGVxaw==" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/triadewisusanti/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        <a href="https://www.tiktok.com/@hereinthegardenx?_r=1&_t=ZS-91GD1NrICPf" class="tiktok"><i class="bi bi-tiktok"></i></a>
+        <a href="https://wa.me/+6281366546193" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+        <a href="https://pin.it/3r0nlsVyq" class="pinterest"><i class="bi bi-pinterest"></i></a>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4 align-items-center">
+          <div class="col-lg-6 order-2 order-lg-1">
+            <div class="hero-content">
+              <h1 data-aos="fade-up" data-aos-delay="200">Hello, I'm </h1><h1><span class="highlight">Tria Dewi Susanti</span></h1>
+              <h2 data-aos="fade-up" data-aos-delay="300">Interest <span class="typed" data-typed-items="Nursing Care, Patient Safety, Emergency Nursing"></span></h2>
+              
+              <div class="hero-actions" data-aos="fade-up" data-aos-delay="500">
+                <a href="portfolio.html" class="btn btn-primary">Portfolio</a>
+                <a href="contact.html" class="btn btn-outline">Contact</a>
+              </div>
+              <audio id="bg-audio" preload="auto" loop>
+                <source src="assets/audio/lagu-ku.mp3" type="audio/mpeg">
+              </audio>
+            </div>
+          </div>
+          <div class="col-lg-6 order-1 order-lg-2">
+            <div class="hero-image" data-aos="zoom-in" data-aos-delay="300">
+              <div class="image-wrapper">
+                <img src="assets/img/profile/profile-square-11.jpeg" alt="Sarah Mitchell" class="img-fluid">
+                <div class="floating-elements">
+                  <div class="floating-card design" data-aos="fade-left" data-aos-delay="700">
+                    <i class="bi-prescription"></i>
+                    <span>Prescription</span>
+                  </div>
+                  <div class="floating-card code" data-aos="fade-right" data-aos-delay="800">
+                    <i class="bi bi-capsule-pill"></i>
+                    <span>Drug</span>
+                  </div>
+                  <div class="floating-card creativity" data-aos="fade-up" data-aos-delay="900">
+                    <i class="bi bi-file-medical-fill"></i>
+                    <span>Medical files</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Hero Section -->
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Tria Dewi Susanti</strong> <span>All Rights Reserved<br></span></p>
+      </div>
+      <div class="social-links d-flex justify-content-center">
+        <a href="https://www.instagram.com/hereinthegardenx?igsh=MXIxMGpqaTU1NGVxaw==" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/triadewisusanti/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        <a href="https://www.tiktok.com/@hereinthegardenx?_r=1&_t=ZS-91GD1NrICPf" class="tiktok"><i class="bi bi-tiktok"></i></a>
+        <a href="https://wa.me/+6281366546193" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+        <a href="https://pin.it/3r0nlsVyq" class="pinterest"><i class="bi bi-pinterest"></i></a>
+      </div>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
