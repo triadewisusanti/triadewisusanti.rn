@@ -51,10 +51,10 @@ body {
   color: var(--default-color);
   background-color: #0b0c10;
   background-image:
-    radial-gradient(circle at 10% 0%, rgba(18, 110, 100, 0.35) 0%, transparent 60%),
-    radial-gradient(circle at 90% 0%, rgba(95, 30, 95, 0.35) 0%, transparent 60%),
-    radial-gradient(circle at 50% 100%, rgba(18, 227, 213, 0.12) 0%, transparent 45%),
-    radial-gradient(circle at 50% 50%, rgba(255, 62, 207, 0.10) 0%, transparent 55%);
+    radial-gradient(circle at 10% 0%, rgba(18, 110, 100, 0.55) 0%, transparent 80%),
+    radial-gradient(circle at 90% 0%, rgba(95, 30, 95, 0.55) 0%, transparent 80%),
+    radial-gradient(circle at 50% 100%, rgba(18, 227, 213, 0.20) 0%, transparent 70%),
+    radial-gradient(circle at 50% 50%, rgba(255, 62, 207, 0.18) 0%, transparent 75%);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
