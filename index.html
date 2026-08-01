@@ -96,6 +96,17 @@
       transform: translate(calc(-50% + var(--scatter-x)), calc(-50% + var(--scatter-y))) scale(0.1);
     }
   }
+  .typed-items-source {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
   /* Sembunyikan tombol musik atas permintaan pengguna */
   .audio-control, #music-toggle { display: none !important; }
 </style>
@@ -208,9 +219,10 @@
           <div class="col-lg-6 order-2 order-lg-1">
             <div class="hero-content">
               <h1 data-aos="fade-up" data-aos-delay="200">Hello, I'm </h1><h1><span class="highlight">Tria Dewi Susanti</span></h1>
-              <h2 data-aos="fade-up" data-aos-delay="300">Interest <span class="typed notranslate" translate="no"></span></h2>
-              <script id="typed-items" type="application/json" translate="no">["Nursing Care","Patient Safety","Emergency Nursing"]</script>
-              
+              <h2 data-aos="fade-up" data-aos-delay="300">Interest <span class="typed" translate="no"></span></h2>
+              <div id="typed-items-source" class="typed-items-source" translate="yes" aria-hidden="true">
+                Nursing Care, Patient Safety, Emergency Nursing
+              </div>
               <div class="hero-actions" data-aos="fade-up" data-aos-delay="500">
                 <a href="portfolio.html" class="btn btn-primary">Certificate</a>
                 <a href="contact.html" class="btn btn-outline">Contact</a>

@@ -102,35 +102,45 @@
    * Init typed.js
    */
   const selectTyped = document.querySelector('.typed');
-  if (selectTyped) {
-    let typed_strings = [];
-    const typedItemsEl = document.querySelector('#typed-items');
+  const typedItemsSource = document.querySelector('#typed-items-source');
+  let typedInstance = null;
 
-    if (typedItemsEl) {
-      try {
-        typed_strings = JSON.parse(typedItemsEl.textContent || '[]');
-      } catch (error) {
-        typed_strings = [];
-      }
+  function getTypedStrings() {
+    if (!typedItemsSource) return [];
+    return typedItemsSource.textContent
+      .split(',')
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
+  function startTyped(strings) {
+    if (!selectTyped) return;
+    if (typedInstance && typeof typedInstance.destroy === 'function') {
+      typedInstance.destroy();
     }
-
-    if (!typed_strings.length) {
-      typed_strings = (selectTyped.getAttribute('data-typed-items') || '')
-        .split(',')
-        .map((item) => item.trim())
-        .filter(Boolean);
-    }
-
     selectTyped.textContent = '';
+    if (!strings.length) return;
 
-    if (typed_strings.length) {
-      new Typed(selectTyped, {
-        strings: typed_strings,
-        loop: true,
-        typeSpeed: 100,
-        backSpeed: 50,
-        backDelay: 2000
+    typedInstance = new Typed(selectTyped, {
+      strings,
+      loop: true,
+      typeSpeed: 100,
+      backSpeed: 50,
+      backDelay: 2000
+    });
+  }
+
+  if (selectTyped) {
+    selectTyped.setAttribute('translate', 'no');
+    selectTyped.classList.add('notranslate');
+
+    startTyped(getTypedStrings());
+
+    if (typedItemsSource) {
+      const observer = new MutationObserver(() => {
+        startTyped(getTypedStrings());
       });
+      observer.observe(typedItemsSource, { childList: true, characterData: true, subtree: true });
     }
   }
 
