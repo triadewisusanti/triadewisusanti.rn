@@ -164,79 +164,65 @@
 
     </section>
 
-<style>
-  /* =========================================
-     CSS Tools (Ikon) 
-     ========================================= */
-  .soft-skill-grid {
-    display: flex;
-    flex-wrap: nowrap;          
-    justify-content: center;   
-    align-items: center;
-    gap: 10px;                  
-    overflow-x: auto;           
-    padding: 10px 0;
-  }
+    <<style>
+      /* =========================================
+        CSS Tools (Ikon) 
+        ========================================= */
+      .soft-skill-grid {
+        display: flex;
+        flex-wrap: wrap; /* Hilangkan scrollbar, item akan menyesuaikan layar */
+        justify-content: center;   
+        align-items: center;
+        gap: 15px;                  
+        padding: 10px 0;
+      }
 
-  .skill-box-compact {
-    background: rgba(255, 255, 255, 0.05); 
-    border-radius: 12px;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 auto;             
-    width: 90px;                
-    height: 90px;
-  }
+      .skill-box-compact {
+        background: rgba(255, 255, 255, 0.05); 
+        border-radius: 12px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90px;                
+        height: 90px;
+        transition: all 0.3s ease; /* Animasi halus saat layar mengecil */
+      }
 
-  .skill-icon-custom {
-    width: 50px; 
-    height: 50px; 
-    border-radius: 12px; 
-    background: rgba(255, 255, 255, 0.07); 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-  }
-  
-  .skill-icon-custom img {
-    width: 32px; 
-    height: 32px; 
-    object-fit: contain;
-  }
+      .skill-icon-custom {
+        width: 50px; 
+        height: 50px; 
+        border-radius: 12px; 
+        background: rgba(255, 255, 255, 0.07); 
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+      
+      .skill-icon-custom img {
+        width: 32px; 
+        height: 32px; 
+        object-fit: contain;
+        transition: all 0.3s ease;
+      }
 
       /* =========================================
-        CSS Professional Skills (1 Baris) 
+        CSS Professional Skills
         ========================================= */
       .pro-skill-row {
         display: flex;
-        flex-wrap: nowrap; /* Memaksa item sejajar dalam 1 baris horizontal */
-        gap: 15px;         /* Jarak antar kartu */
-        overflow-x: auto;  /* Mengaktifkan scroll menyamping jika lebih dari lebar layar */
-        padding-bottom: 15px; 
+        flex-wrap: wrap; /* Hilangkan scrollbar di bagian ini juga */
+        justify-content: center; 
+        gap: 15px;         
       }
 
-      /* Styling khusus Scrollbar agar lebih elegan (Webkit) */
-      .pro-skill-row::-webkit-scrollbar {
-        height: 8px;
-      }
-      .pro-skill-row::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.02);
-        border-radius: 10px;
-      }
-      .pro-skill-row::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-      }
-
-      /* Desain Kartu Skill */
       .pro-skill-card {
         background: rgba(255, 255, 255, 0.05);
         border-radius: 10px;
         padding: 20px;
-        flex: 0 0 auto; /* Mencegah kartu tertekan/mengecil */
-        width: 240px;   /* Lebar tetap untuk setiap kartu */
+        flex: 1 1 240px; /* Fleksibel membesar/mengecil mengikuti layar */
+        max-width: 100%;
       }
 
       .pro-skill-card h3 {
@@ -249,14 +235,56 @@
       /* Progress Bar Tipis */
       .pro-skill-card .progress {
         height: 6px; 
-        background-color: rgba(255, 255, 255, 0.1); /* Warna track redup */
+        background-color: rgba(255, 255, 255, 0.1); 
         border-radius: 10px;
         overflow: hidden;
       }
 
       .pro-skill-card .progress-bar {
-        background-color: #64ffda; /* Warna hijau mint sesuai gambar */
+        background-color: #64ffda; 
         border-radius: 10px;
+      }
+
+      /* =========================================
+        MEDIA QUERIES (Mobile Responsive - Mengecil)
+        ========================================= */
+      @media (max-width: 768px) {
+        /* Mengecil di Tablet / HP */
+        .skill-box-compact {
+          width: 70px;
+          height: 70px;
+          padding: 10px;
+          border-radius: 10px;
+        }
+        .skill-icon-custom {
+          width: 40px;
+          height: 40px;
+        }
+        .skill-icon-custom img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        /* Makin kecil di layar HP yang sempit */
+        .soft-skill-grid {
+          gap: 10px; /* Jarak dibuat lebih rapat */
+        }
+        .skill-box-compact {
+          width: 60px;
+          height: 60px;
+          padding: 8px;
+        }
+        .skill-icon-custom {
+          width: 35px;
+          height: 35px;
+          border-radius: 10px;
+        }
+        .skill-icon-custom img {
+          width: 20px;
+          height: 20px;
+        }
       }
     </style>
 
@@ -317,7 +345,7 @@
         </div>
       </div>
 
-      <!-- Bagian Professional Skills (1 Baris Horizontal) -->
+      <!-- Bagian Professional Skills -->
       <div class="container mt-5" data-aos="fade-up" data-aos-delay="100">
         <div class="pro-skill-row skills-animation">
           
