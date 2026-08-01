@@ -1432,8 +1432,80 @@ section,
   padding-bottom: 0;
 }
 
-.resume .skill-item {
-  margin-bottom: 2rem;
+.resume .soft-skill-grid,
+.soft-skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  align-items: start;
+  justify-items: center;
+}
+
+.resume .skill-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+  max-width: 220px;
+  text-align: center;
+  min-height: 210px;
+}
+
+.resume .skill-box .skill-name {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.soft-skill-card {
+  width: 140px;
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.soft-skill-icon {
+  width: 65px;
+  height: 65px;
+  margin: 0 auto 12px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.soft-skill-icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.soft-skill-name {
+  margin: 0 0 10px;
+  color: var(--heading-color);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.soft-skill-bar {
+  height: 7px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.soft-skill-fill {
+  height: 100%;
+  background: var(--accent-color);
+  border-radius: 10px;
 }
 
 .resume .skill-item h4 {
@@ -1443,12 +1515,62 @@ section,
   color: var(--heading-color);
 }
 
-.resume .skill-item .progress {
-  height: 0.75rem;
-  background-color: color-mix(in srgb, var(--accent-color), transparent 92%);
-  border-radius: 1rem;
-  overflow: visible;
-}
+  .resume .skill-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+  .resume .skill-box .skill-progress {
+    width: 100%;
+    height: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .resume .skill-box .skill-progress span {
+    display: block;
+    height: 100%;
+    background-color: var(--accent-color);
+    border-radius: 1rem;
+    transition: width 0.9s ease;
+  }
+
+  /* Generic skill progress used across pages (About + Resume) */
+  .skill-progress {
+    width: 100%;
+    max-width: 320px;
+    height: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .skill-progress span {
+    display: block;
+    height: 100%;
+    background-color: var(--accent-color);
+    border-radius: 1rem;
+    transition: width 0.9s ease;
+  }
+
+  .resume .skill-box .skill-progress span {
+    display: block;
+    height: 100%;
+    width: auto;
+    background-color: var(--accent-color);
+    border-radius: 1rem;
+    transition: width 0.9s ease;
+  }
 
 .resume .skill-item .progress .progress-bar {
   background-color: var(--accent-color);
@@ -2893,6 +3015,12 @@ section,
   font-size: 20px;
   flex-shrink: 0;
 }
+
+/* Responsive item width tweak (only for resume page) */
+.resume .skill-box {
+  min-width: 220px;
+}
+.skill-box[style] { /* keep inline min-width if present */ }
 
 /* Warna-warni ikon Hard Skill agar cantik */
 .icon-red {

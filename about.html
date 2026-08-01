@@ -35,7 +35,6 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html" class="active">About</a></li>
-          <li><a href="resume.html">Skills & Tools</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="portfolio.html">Certificate</a></li>
           <li><a href="gallery.html">Intership Experience</a></li>
@@ -165,63 +164,227 @@
 
     </section>
 
+<style>
+  /* =========================================
+     CSS Tools (Ikon) 
+     ========================================= */
+  .soft-skill-grid {
+    display: flex;
+    flex-wrap: nowrap;          
+    justify-content: center;   
+    align-items: center;
+    gap: 10px;                  
+    overflow-x: auto;           
+    padding: 10px 0;
+  }
+
+  .skill-box-compact {
+    background: rgba(255, 255, 255, 0.05); 
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;             
+    width: 90px;                
+    height: 90px;
+  }
+
+  .skill-icon-custom {
+    width: 50px; 
+    height: 50px; 
+    border-radius: 12px; 
+    background: rgba(255, 255, 255, 0.07); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+  }
+  
+  .skill-icon-custom img {
+    width: 32px; 
+    height: 32px; 
+    object-fit: contain;
+  }
+
+      /* =========================================
+        CSS Professional Skills (1 Baris) 
+        ========================================= */
+      .pro-skill-row {
+        display: flex;
+        flex-wrap: nowrap; /* Memaksa item sejajar dalam 1 baris horizontal */
+        gap: 15px;         /* Jarak antar kartu */
+        overflow-x: auto;  /* Mengaktifkan scroll menyamping jika lebih dari lebar layar */
+        padding-bottom: 15px; 
+      }
+
+      /* Styling khusus Scrollbar agar lebih elegan (Webkit) */
+      .pro-skill-row::-webkit-scrollbar {
+        height: 8px;
+      }
+      .pro-skill-row::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 10px;
+      }
+      .pro-skill-row::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+
+      /* Desain Kartu Skill */
+      .pro-skill-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 20px;
+        flex: 0 0 auto; /* Mencegah kartu tertekan/mengecil */
+        width: 240px;   /* Lebar tetap untuk setiap kartu */
+      }
+
+      .pro-skill-card h3 {
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 15px;
+        color: #ffffff;
+      }
+
+      /* Progress Bar Tipis */
+      .pro-skill-card .progress {
+        height: 6px; 
+        background-color: rgba(255, 255, 255, 0.1); /* Warna track redup */
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .pro-skill-card .progress-bar {
+        background-color: #64ffda; /* Warna hijau mint sesuai gambar */
+        border-radius: 10px;
+      }
+    </style>
+
     <section id="skills" class="skills section">
-
+      
+      <!-- Bagian Judul Section -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Skills</h2>
-        <p>Some of my skills</p>
+        <h2>Skills & Tools</h2>
+        <p>Some of my skills and tools</p>
       </div>
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row g-4 skills-animation">
+      <!-- Bagian Digital & Creative Tools -->
+      <div class="container mt-4">
+        <div class="col-12">
+          <div class="soft-skill-grid">
+            <!-- Canva -->
+            <div class="skill-box-compact" data-aos="fade-up" data-aos-delay="100">
+              <div class="skill-icon-custom">
+                <img src="assets/img/logos/canva.webp" alt="Canva" class="img-fluid">
+              </div>
+            </div>
 
-          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-            <div class="skill-box">
-              <h3>Nursing Care</h3>
-              <p>Providing medical care, emotional support, and assisting with daily activities.</p>
-              <span class="text-end d-block">90%</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-                </div>
+            <!-- Phonto -->
+            <div class="skill-box-compact" data-aos="fade-up" data-aos-delay="150">
+              <div class="skill-icon-custom">
+                <img src="assets/img/logos/phonto.jpeg" alt="Phonto" class="img-fluid">
+              </div>
+            </div>
+
+            <!-- VSCO -->
+            <div class="skill-box-compact" data-aos="fade-up" data-aos-delay="200">
+              <div class="skill-icon-custom">
+                <img src="assets/img/logos/vsco.jpg" alt="VSCO" class="img-fluid">
+              </div>
+            </div>
+
+            <!-- Snapseed -->
+            <div class="skill-box-compact" data-aos="fade-up" data-aos-delay="250">
+              <div class="skill-icon-custom">
+                <img src="assets/img/logos/snapseed.png" alt="Snapseed" class="img-fluid">
+              </div>
+            </div>
+
+            <!-- Capcut -->
+            <div class="skill-box-compact" data-aos="fade-up" data-aos-delay="300">
+              <div class="skill-icon-custom">
+                <img src="assets/img/logos/capcut.jpg" alt="Capcut" class="img-fluid">
+              </div>
+            </div>
+
+            <!-- Microsoft Word -->
+            <div class="skill-box-compact" data-aos="fade-up" data-aos-delay="350">
+              <div class="skill-icon-custom">
+                <img src="assets/img/logos/word.png" alt="Word" class="img-fluid">
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-            <div class="skill-box">
-              <h3>Patient Safety</h3>
-              <p>Managing factors that potentially cause risks.</p>
-              <span class="text-end d-block">90%</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-                </div>
-              </div>
+      <!-- Bagian Professional Skills (1 Baris Horizontal) -->
+      <div class="container mt-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="pro-skill-row skills-animation">
+          
+          <!-- Blood Drawing -->
+          <div class="pro-skill-card">
+            <h3>Blood Drawing</h3>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
 
-          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-            <div class="skill-box">
-              <h3>Video Editing</h3>
-              <p>Proficient in using applications such as Adobe Premiere Pro, Final Cut Pro, or DaVinci Resolve.</p>
-              <span class="text-end d-block">80%</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                </div>
-              </div>
+          <!-- Patient Safety -->
+          <div class="pro-skill-card">
+            <h3>Patient Safety</h3>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
 
-          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-            <div class="skill-box">
-              <h3>Photography</h3>
-              <p>Mastering composition, lighting, and editing, as well as interpersonal skills like communication.</p>
-              <span class="text-end d-block">80%</span>
-              <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                </div>
-              </div>
+          <!-- Wound Care -->
+          <div class="pro-skill-card">
+            <h3>Wound Care</h3>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
+
+          <!-- Nebulizer -->
+          <div class="pro-skill-card">
+            <h3>Nebulizer</h3>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+
+          <!-- Nursing Care -->
+          <div class="pro-skill-card">
+            <h3>Nursing Care</h3>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+
+          <!-- IV Insertion -->
+          <div class="pro-skill-card">
+            <h3>IV Insertion</h3>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+
+          <!-- Emergency Nursing -->
+          <div class="pro-skill-card">
+            <h3>Emergency Nursing</h3>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+
+          <!-- Vital Signs -->
+          <div class="pro-skill-card">
+            <h3>Vital Signs</h3>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
