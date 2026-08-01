@@ -103,13 +103,24 @@
    */
   const selectTyped = document.querySelector('.typed');
   if (selectTyped) {
-    let typed_strings = selectTyped.getAttribute('data-typed-items') || selectTyped.textContent || '';
-    typed_strings = typed_strings
-      .split(',')
-      .map((item) => item.trim())
-      .filter(Boolean);
+    let typed_strings = [];
+    const typedItemsEl = document.querySelector('#typed-items');
 
-    // Reset the typed element so injected translation text doesn't remain
+    if (typedItemsEl) {
+      try {
+        typed_strings = JSON.parse(typedItemsEl.textContent || '[]');
+      } catch (error) {
+        typed_strings = [];
+      }
+    }
+
+    if (!typed_strings.length) {
+      typed_strings = (selectTyped.getAttribute('data-typed-items') || '')
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+
     selectTyped.textContent = '';
 
     if (typed_strings.length) {
