@@ -103,15 +103,24 @@
    */
   const selectTyped = document.querySelector('.typed');
   if (selectTyped) {
-    let typed_strings = selectTyped.getAttribute('data-typed-items');
-    typed_strings = typed_strings.split(',');
-    new Typed('.typed', {
-      strings: typed_strings,
-      loop: true,
-      typeSpeed: 100,
-      backSpeed: 50,
-      backDelay: 2000
-    });
+    let typed_strings = selectTyped.getAttribute('data-typed-items') || selectTyped.textContent || '';
+    typed_strings = typed_strings
+      .split(',')
+      .map((item) => item.trim())
+      .filter(Boolean);
+
+    // Reset the typed element so injected translation text doesn't remain
+    selectTyped.textContent = '';
+
+    if (typed_strings.length) {
+      new Typed(selectTyped, {
+        strings: typed_strings,
+        loop: true,
+        typeSpeed: 100,
+        backSpeed: 50,
+        backDelay: 2000
+      });
+    }
   }
 
   /**
