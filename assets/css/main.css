@@ -2770,9 +2770,11 @@ section,
 --------------------------------------------------------------*/
 .contact .info-box {
   background-color: var(--surface-color);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 3rem;
   border-radius: 1rem;
   height: 100%;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
 }
 
 .contact .info-box h3 {
@@ -2865,7 +2867,7 @@ section,
 
 .contact .contact-form h3 {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 @media (max-width: 768px) {
@@ -2875,47 +2877,70 @@ section,
 }
 
 .contact .contact-form p {
-  color: color-mix(in srgb, var(--default-color), transparent 25%);
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
   margin-bottom: 2rem;
+  line-height: 1.8;
 }
 
 .contact .contact-form .form-control,
 .contact .contact-form .form-select {
-  padding: 0.875rem 1.25rem;
-  border-color: color-mix(in srgb, var(--default-color), transparent 90%);
-  border-radius: 0.5rem;
-  background-color: transparent;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.03);
   color: var(--default-color);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .contact .contact-form .form-control:focus,
 .contact .contact-form .form-select:focus {
-  box-shadow: none;
+  box-shadow: 0 0 0 0.2rem rgba(18, 227, 213, 0.15);
   border-color: var(--accent-color);
+  background-color: rgba(18, 227, 213, 0.05);
 }
 
 .contact .contact-form .form-control::placeholder,
 .contact .contact-form .form-select::placeholder {
-  color: color-mix(in srgb, var(--default-color), transparent 50%);
+  color: color-mix(in srgb, var(--default-color), transparent 55%);
 }
 
 .contact .contact-form .btn {
-  background-color: color-mix(in srgb, var(--surface-color), transparent 80%);
-  color: var(--contrast-color);
+  background: linear-gradient(135deg, rgba(18, 227, 213, 0.95), rgba(111, 36, 198, 0.95));
+  color: var(--background-color);
   padding: 1rem 2rem;
   border-radius: 2rem;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  transition: 0.3s;
+  border: none;
+  font-weight: 600;
+  box-shadow: 0 15px 30px rgba(18, 227, 213, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact .contact-form .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 35px rgba(18, 227, 213, 0.18);
+}
+
+.contact .contact-form .btn:active {
+  transform: translateY(0);
 }
 
 .contact .contact-form .btn i {
   font-size: 1.25rem;
 }
 
-.contact .contact-form .btn:hover {
-  background-color: color-mix(in srgb, var(--surface-color), transparent 70%);
+.contact .contact-form .contact-label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.contact .contact-form .form-group {
+  position: relative;
 }
 
 .meta-wrapper {
